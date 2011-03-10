@@ -52,7 +52,6 @@ import android.widget.Toast;
 
 import com.android.providers.downloads.ui.DownloadItem.DownloadSelectListener;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -593,14 +592,6 @@ public class DownloadList extends Activity
                         return;
                     } else {
                         getContentResolver().delete(Uri.parse(mediaProviderUri), null, null);
-                        // sometimes mediaprovider doesn't delete file from sdcard after deleting it
-                        // from its db. delete it now
-                        try {
-                          File file = new File(path);
-                          file.delete();
-                      } catch (Exception e) {
-                          Log.w(LOG_TAG, "file: '" + path + "' couldn't be deleted", e);
-                      }
                     }
                 }
             }
